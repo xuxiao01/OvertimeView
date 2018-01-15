@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+       datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Toast.makeText(MainActivity.this, year + "年" + (monthOfYear+1) + "月" + dayOfMonth + "日", Toast.LENGTH_SHORT).show();
+                day = dayOfMonth;
+                addovertime(datePicker);
+                //Toast.makeText(MainActivity.this, year + "年" + (monthOfYear+1) + "月" + dayOfMonth + "日", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         View view = inflater.inflate(R.layout.wagelayout, null) ;
         dialogBuilder.setView(view) ;
         dialogBuilder.show() ;
+    }
+    public void addovertime(View view){
+        LayoutInflater inflater = getLayoutInflater();
+        View view1= inflater.inflate(R.layout.dialog_layout,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this) ;
+        //builder.setTitle("添加工时");
+        builder.setView(view1);
+        builder.create().show();
     }
 
 
