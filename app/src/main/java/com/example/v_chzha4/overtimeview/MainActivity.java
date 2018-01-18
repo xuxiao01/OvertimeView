@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         datePicker = (DatePicker)findViewById(R.id.datepicker);
 
         initData();
+        //countovertime();
     }
 
     public void initData(){
@@ -52,8 +56,10 @@ public class MainActivity extends AppCompatActivity {
         wageDialog(this);
     }
     public void overtime(View v){
+
         Toast.makeText(this, "加班小时数", Toast.LENGTH_SHORT).show();
     }
+
     public static void wageDialog(Context context){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context) ;
         dialogBuilder.create() ;
@@ -70,6 +76,33 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(view1);
         builder.create().show();
     }
-
+    public void  countovertime() {
+        final RadioButton g1 = (RadioButton) findViewById(R.id.G1);
+        final RadioButton g2 = (RadioButton) findViewById(R.id.G2);
+        final RadioButton g3 = (RadioButton) findViewById(R.id.G3);
+        Button confime = (Button) findViewById(R.id.confime);
+        confime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float g1Count = 0;
+                float g2Count = 0;
+                float g3Count = 0;
+                EditText editText = (EditText) findViewById(R.id.edit1);
+                final float count = Float.valueOf(editText.getText().toString());
+                if (g1.isChecked()) {
+                    g1Count += count;
+                    String str1 = String.valueOf(g1Count);
+                    Toast.makeText(MainActivity.this, str1, Toast.LENGTH_SHORT).show();
+                    System.out.println(g1Count);
+                } else if (g2.isChecked()) {
+                    g2Count += count;
+                    System.out.println(g2Count);
+                } else if (g3.isChecked()) {
+                    g3Count += count;
+                    System.out.println(g3Count);
+                }
+            }
+        });
+    }
 
 }
